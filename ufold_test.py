@@ -69,7 +69,7 @@ def get_ct_dict_fast(predict_matrix,batch_num,ct_dict,dot_file_dict,seq_embeddin
 # randomly select one sample from the test set and perform the evaluation
 
 def model_eval_all_test(contact_net,test_generator):
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     contact_net.train()
     result_no_train = list()
     result_no_train_shift = list()
@@ -201,7 +201,7 @@ def model_eval_all_test(contact_net,test_generator):
 
 def main():
     torch.multiprocessing.set_sharing_strategy('file_system')
-    torch.cuda.set_device(2)
+    #torch.cuda.set_device(2)
     
     #pdb.set_trace()
     
@@ -254,7 +254,7 @@ def main():
     
     
     # if gpu is to be used
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     seed_torch()
     
@@ -319,7 +319,7 @@ def main():
     
     #pdb.set_trace()
     print('==========Start Loading==========')
-    contact_net.load_state_dict(torch.load(MODEL_SAVED,map_location='cuda:1'))
+    contact_net.load_state_dict(torch.load(MODEL_SAVED, map_location='cuda'))
     print('==========Finish Loading==========')
     # contact_net = nn.DataParallel(contact_net, device_ids=[3, 4])
     contact_net.to(device)

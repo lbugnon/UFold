@@ -143,7 +143,7 @@ def type_pairs(pairs, sequence):
 
 
 def model_eval_all_test(contact_net,test_generator):
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     contact_net.train()
     result_no_train = list()
     result_no_train_shift = list()
@@ -294,7 +294,7 @@ def main():
 
     MODEL_SAVED = 'models/ufold_train_alldata.pt'
 
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     seed_torch()
         
@@ -311,7 +311,7 @@ def main():
 
     #pdb.set_trace()
     print('==========Start Loading Pretrained Model==========')
-    contact_net.load_state_dict(torch.load(MODEL_SAVED,map_location='cuda:1'))
+    contact_net.load_state_dict(torch.load(MODEL_SAVED,map_location='cuda'))
     print('==========Finish Loading Pretrained Model==========')
     # contact_net = nn.DataParallel(contact_net, device_ids=[3, 4])
     contact_net.to(device)
