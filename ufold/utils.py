@@ -65,8 +65,12 @@ def get_args():
     argparser.add_argument('--train_files', type=str, required=False,nargs='+',default=['RNAStralign','ArchiveII','TR0_with_data_augmentation',
 				'TS0','PDB_train','bpnew','TS1','TS2','TS3'],
         help='training file name list.')
-    argparser.add_argument('--test_files', required=False,nargs='?',default='ArchiveII',choices=['ArchiveII','TS0','bpnew','TS1','TS2','TS3'],
+    argparser.add_argument('--model_path', type=str, required=False, default=['model_weights'],
+        help='path to save/load model weights.')
+    argparser.add_argument('--test_files', required=False,nargs='?',default='ArchiveII',
         help='test file name')
+    argparser.add_argument('--trained_model', required=False,
+        help='Trained model (to be used in test/predict)')
     args = argparser.parse_args()
     return args
 
