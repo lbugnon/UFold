@@ -1,5 +1,5 @@
 {
-	"gpu": "0",
+	"device": "cpu",
 	"u_net_d": 10,
 	"BATCH_SIZE": 1,
 	"batch_size_stage_1": 1,
