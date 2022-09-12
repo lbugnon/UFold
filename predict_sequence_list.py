@@ -16,8 +16,14 @@ def bpseq2fasta(fname, out_path):
 if not os.path.isdir(out_path):
     os.mkdir(out_path)
 
+failed = []
 for f in os.listdir(seq_path):
     id, out_file = bpseq2fasta(f"{seq_path}{f}", out_path)
     
     os.system(f"python ufold_predict.py --trained_model {trained_model} --pred_file {out_file}")
-    shutil.copyfile(f"results/save_ct_file/{id}.ct", f"{out_path}/{id}.ct")
+    try:
+        shutil.copyfile(f"results/save_ct_file/{id}.ct", f"{out_path}/{id}.ct")
+    except FileNotFoundError:
+        failed.append(id)
+print("failed sequences", len(failed))
+print(failed)
